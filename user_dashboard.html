@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="icon" href="images/user.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
+  <title>User Dashboard</title>
+</head>
+
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light1 scrolled" id="ftco-navbar">
+  <div class="container">
+    <a class="navbar-brand img d-flex justify-content-center" href="index.html"
+      style="background-image: url('images/logo.png'); height: 90x; width: 90px;"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+      aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="oi oi-menu"></span> Menu
+  </button>
+
+    <div class="collapse navbar-collapse" id="ftco-nav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+        <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+        <li class="nav-item active"><a href="course.html" class="nav-link">Course</a></li>
+        <li class="nav-item"><a href="instructor.html" class="nav-link">Instructor</a></li>
+        <li class="nav-item"><a href="blog.html" class="nav-link">Upcoming Events</a></li>
+        <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="sidebar">
+  <div class="logo-details">
+    <a href="index.html" class="logo_name">
+      <div class="logo_name">PrepPros</div>
+    </a>
+    <i class="bx bx-menu" id="btn"></i>
+  </div>
+  <ul class="nav-list">
+    <li class="profile">
+      <div class="profile-details">
+        <img src="images/user.png" alt="" />
+        <div class="name_job">
+          <div class="name"> Welcome
+            <?php echo $row['full_name']; ?>
+          </div>
+          <div class="job">
+            <?php echo $_SESSION['user_name']; ?>
+          </div>
+        </div>
+      </div>
+
+    </li>
+    <li>
+      <a href="chart.html">
+        <i class="bx bx-user"></i>
+        <span class="links_name">My Profile</span>
+      </a>
+      <span class="tooltip">My Profile</span>
+    </li>
+    <li>
+      <a href="#">
+        <i class="bx bx-bookmark"></i>
+        <span class="links_name"> Bookmarks</span>
+      </a>
+    </li>
+    <li>
+      <a href="#">
+        <i class="bx bx-cog"></i>
+        <span class="links_name">Settings</span>
+      </a>
+      <span class="tooltip">Settings</span>
+    </li>
+    <li>
+      <a href="#">
+        <i class="bx bx-laptop"></i>
+        <span class="links_name"> My Courses</span>
+      </a>
+      <span class="tooltip">My Courses</span>
+    </li>
+    <li>
+      <a href="#">
+        <i class="bx bx-comment"></i>
+        <span class="links_name">Feedback</span>
+      </a>
+      <span class="tooltip">Feedback</span>
+    </li>
+    <li>
+      <a href="#">
+        <i class="bx bx-log-out" id="log_out"></i>
+        <span class="links_name">Logout</span>
+      </a>
+      <span class="tooltip">Logout</span>
+    </li>
+  </ul>
+</div>
+
+<!-- Boxicons CDN Link -->
+<script src="js/dashboard_script.js"></script>
+
+</html>

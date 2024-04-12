@@ -1,0 +1,16 @@
+def confess_feelings():
+    print("Hey [Her Name],")
+    print("I've been doing some serious thinking lately, and I've come to a groundbreaking conclusion:")
+    
+    # Simulate a decision
+    response = input("Drumroll, please... Do you also enjoy the incredibly fascinating and rare phenomenon known as 'hanging out with me'? (Type 'yes' or 'no'): ")
+    
+    if response.lower() == 'yes':
+        print("Fantastic news! It turns out, we might just be the perfect pair of weirdos. 😄")
+        print("How about we continue our little experiment called 'life' together? Deal?")
+    else:
+        print("Ah, the suspense! It seems like our compatibility tests have produced some unexpected results.")
+        print("No worries, we can still be buddies in this wild adventure called life. Ready for some epic friendship shenanigans? 😜")
+
+# Call the function to confess your feelings
+confess_feelings()

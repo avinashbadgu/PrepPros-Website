@@ -1,0 +1,136 @@
+<?php
+include(dirname(__DIR__) . '/functions/db.php');
+?>
+
+
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar  ftco-navbar-light" id="ftco-navbar">
+    <div class="container">
+    <!-- <span><img src="#" alt="image" height="58px"></span> -->
+      <a class="navbar-brand" href="<?php echo $base_url;?>home.php"><span>Prep</span>Pros</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+        aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="oi oi-menu"></span> Menu
+      </button>
+
+      <div class="collapse navbar-collapse" id="ftco-nav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active"><a href="<?php echo $base_url;?>premium.php" class="nav-link" style="color:#3ff0cb;">Premium</a></li>
+          <li class="nav-item active"><a href="<?php echo $base_url;?>home.php" class="nav-link">Home</a></li>
+          <li class="nav-item"><a href="<?php echo $base_url;?>resources.php" class="nav-link">Resources</a>
+          <li class="nav-item"><a href="<?php echo $base_url;?>instructor.php" class="nav-link">Instructor</a></li>
+          <!-- <!-- <li class="nav-item"><a href="#"class="nav-link"> Interview Preparation</a></li> -->
+          <!-- <li class="nav-item"><a href="blog_details.html"class="nav-link">All Problems</a></li> -->
+          <li class="nav-item"><a href="<?php echo $base_url;?>blog.php"class="nav-link">Articles</a></li> 
+          <li class="nav-item"><a href="<?php echo $base_url;?>about.php" class="nav-link">About</a></li>
+          <li class="nav-item"><a href="<?php echo $base_url;?>contact.php" class="nav-link">Contact</a></li>
+
+
+          <?php
+                
+                if (isset($_SESSION['id'])) {
+                ?>
+                    <ul class="hrd-prof">
+                        <?php 
+                        // Fetch records from cart_items and cart tables based on the relationship
+                        if (isset($_SESSION['id'])) {
+                           $userId = $_SESSION['id'];
+                            // Fetch cartID based on user ID
+                            // echo $sql22 = "SELECT full_name,profile_pic FROM users WHERE id =". $_SESSION['id'];
+                            // $result = $conn->query($sql22);
+                            // var_dump($result);die;
+                            // $row = $result->fetch_assoc();
+                            $sql = "SELECT user_type,full_name, email, profile_pic FROM users WHERE id = ?";
+
+                            // Prepare the statement
+                            $stmt = $conn->prepare($sql);
+
+                            // Bind the 'id' session variable as an integer parameter
+                            $stmt->bind_param("i", $_SESSION['id']);
+
+                            // Execute the statement
+                            $stmt->execute();
+
+                            // Bind the result variables
+                            $stmt->bind_result($user_type,$full_name, $profile_pic, $email);
+                            // Fetch the result
+                            $stmt->fetch();
+
+                            $_SESSION['user_type']=$user_type;
+                            
+                            $stmt->close();
+                            $_SESSION["path"]="";
+
+                            if(isset($_SESSION['user_type']))
+                            {
+                                if($_SESSION['user_type']=='admin')
+                                {
+                                    $_SESSION["path"]="$base_url.#";
+                                }
+                                elseif($_SESSION['user_type']=='premium')
+                                {
+                                    $_SESSION["path"]="$base_url.#";
+                                }
+                                elseif($_SESSION['user_type']=='user')
+                                {
+                                    $_SESSION["path"]="$base_url.#";
+                                }
+                                else
+                                {
+                                    echo "error";
+                                }
+                                
+                            }
+                            
+                        }
+                        ?>
+                        <p>Hello <?php echo $_SESSION['full_name']; ?> &nbsp; <a href="#" class="display-picture"><img src="<?php echo 'data:image/jpeg;base64,' . base64_encode($profile_pic); ?>" onError="this.onerror=null;this.src='<?php echo $base_url;?>/images/user.png';" alt="User"></a>
+                    </ul>
+
+                    <div class="card hidden hrd-prof-menu">
+                        <ul>
+                            <li><a href="<?php echo $base_url;?>#">Profile</li></a>
+                            <?php
+                            if($_SESSION['user_type'] === 'premium')
+                            {
+                                ?>
+                                <li><a href="<?php echo $base_url;?>#">My Tests</li></a>
+                            <?php
+                            }
+                            else if ($_SESSION['user_type'] === 'admin') {
+                                ?>
+                                <li><a href="<?php echo $base_url;?>#">ManageUsers</li></a>
+                            <?php
+                            } else {
+                                ?>
+                                <li><a href="<?php echo $base_url;?>/premium.php">GetPremium</li></a>
+                            <?php
+                            }
+                            
+                            ?>
+                            
+                            <!-- <li><a href="<?php echo $base_url;?>">Account</li></a> -->
+                            <li><a href="<?php echo $base_url; ?>#";?>Settings</li></a>
+                            <li><a href="<?php echo $base_url;?>/login&signup/logout.php">Logout</li></a>
+                        </ul>
+                    </div>
+                <?php
+                } else {
+                ?>
+
+
+
+        
+          <li class="nav-item"><a href="<?php echo $base_url;?>login&signup/login.php" class="nav-link">Login</a></li>
+         <li class="nav-item"><a href="<?php echo $base_url;?>login&signup/register.php" class="nav-link">Signup</a></li>
+         <?php
+                }
+                ?>
+    
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- END nav -->
+  <script src="<?php echo $base_url;?>/js/profile_pic_dd.js"></script>
